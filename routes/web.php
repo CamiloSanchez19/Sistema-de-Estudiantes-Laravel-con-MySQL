@@ -90,7 +90,7 @@ Route::middleware(['auth', 'role:estudiante'])->prefix('estudiante')->name('estu
 */
 Route::middleware(['auth', 'role:docente'])->prefix('docente')->name('docente.')->group(function () {
     Route::get('calificaciones/create/{idAsignacion}', [CalificacionController::class, 'create'])
-        ->name('calificaciones.create');
+        ->name('calificaciones.create.asignacion');
 
     Route::post('calificaciones', [CalificacionController::class, 'store'])
         ->name('calificaciones.store');
@@ -163,23 +163,4 @@ Route::middleware(['auth', 'role:docente'])->prefix('docente')->name('docente.')
     Route::resource('calificaciones', CalificacionController::class);
 });
 
-/*
-|--------------------------------------------------------------------------
-| Rutas de autenticación por defecto (Laravel Breeze / Fortify)
-|--------------------------------------------------------------------------
-*/
-Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
-});
 
-Route::middleware('auth')->group(function () {
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Rutas de autenticación adicionales
-|--------------------------------------------------------------------------
-*/
-require __DIR__.'/auth.php';

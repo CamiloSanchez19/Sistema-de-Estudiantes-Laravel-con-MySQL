@@ -13,7 +13,7 @@ Aplicación web construida con Laravel para administrar procesos académicos bá
 
 ## Stack técnico
 
-- PHP 8.4+
+- PHP 8.2+ (compatibilidad de dependencias fijada para 8.2.30)
 - Laravel 12
 - MySQL (configuración activa del proyecto) o SQLite (base en `.env.example`)
 - Livewire 3 + Flux UI
@@ -81,44 +81,11 @@ npm run dev
 
 Este repositorio ya incluye `nixpacks.toml` para Railway, con:
 
-- PHP 8.4 (evita el error de `symfony/string` con PHP 8.2).
+- PHP 8.4 en runtime/buildpack.
 - Instalación de dependencias de Composer y Node.
 - Build de assets con Vite.
 - Comando de inicio usando `php -S` sobre `public`.
-
-### Pasos
-
-1. Crea un proyecto en Railway y conecta este repositorio.
-2. En Variables de Railway configura, como mínimo:
-  - `APP_ENV=production`
-  - `APP_DEBUG=false`
-  - `APP_KEY` (générala con `php artisan key:generate --show`)
-  - `APP_URL` (dominio público de Railway)
-  - `DB_CONNECTION=mysql`
-  - `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
-  - `CACHE_STORE=database`
-  - `SESSION_DRIVER=database`
-  - `QUEUE_CONNECTION=database`
-3. Haz deploy.
-4. Ejecuta migraciones en Railway (una vez por entorno):
-
-  ```bash
-  php artisan migrate --force
-  ```
-
-5. Carga datos base (opcional, para pruebas):
-
-  ```bash
-  php artisan db:seed --force
-  ```
-
-### Solución del error reportado
-
-Si aparece este error en build:
-
-`symfony/string ... requires php >=8.4 -> your php version (8.2.30) does not satisfy that requirement`
-
-Se corrige fijando PHP 8.4 en Railway. En este repo ya queda resuelto con `nixpacks.toml`.
+- Lock y plataforma de Composer compatibles con PHP 8.2.30.
 
 ## Credenciales de prueba (seed)
 
