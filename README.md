@@ -77,11 +77,34 @@ php -S 127.0.0.1:8000 -t public
 npm run dev
 ```
 
-- PHP 8.4 en runtime/buildpack
+## Despliegue en Railway
+
+Este proyecto puede arrancar con SQLite en Railway usando el archivo inicial `database/database.sqlite`.
+
+Variables recomendadas en Railway:
+
+```text
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=base64:...
+APP_URL=https://tu-dominio.up.railway.app
+DB_CONNECTION=sqlite
+LOG_CHANNEL=stderr
+CACHE_STORE=file
+SESSION_DRIVER=file
+QUEUE_CONNECTION=sync
+```
+
+Si cambiaste el esquema o el archivo SQLite, vuelve a desplegar el proyecto para que Railway copie la base incluida.
+
+### Configuración del repo
+
+- PHP 8.4 en runtime/buildpack.
 - Instalación de dependencias de Composer y Node.
 - Build de assets con Vite.
 - Comando de inicio usando `php -S` sobre `public`.
 - Lock y plataforma de Composer compatibles con PHP 8.2.30.
+- SQLite inicial versionado en `database/database.sqlite`.
 
 ## Credenciales de prueba (seed)
 
