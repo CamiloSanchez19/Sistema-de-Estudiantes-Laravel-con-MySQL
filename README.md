@@ -77,11 +77,7 @@ php -S 127.0.0.1:8000 -t public
 npm run dev
 ```
 
-## Despliegue en Railway
-
-Este repositorio ya incluye `nixpacks.toml` para Railway, con:
-
-- PHP 8.4 en runtime/buildpack.
+- PHP 8.4 en runtime/buildpack
 - Instalación de dependencias de Composer y Node.
 - Build de assets con Vite.
 - Comando de inicio usando `php -S` sobre `public`.
