@@ -28,8 +28,14 @@ class CalificacionController extends Controller
     /**
      * Formulario para registrar / editar calificaciones
      */
-    public function create($idAsignacion)
+    public function create($idAsignacion = null)
     {
+        if (!$idAsignacion) {
+            return redirect()
+                ->route('docente.calificaciones.index')
+                ->with('error', 'Debe seleccionar una asignación para registrar calificaciones.');
+        }
+
         $asignacion = AsignacionDocente::with(['materia','curso'])
             ->findOrFail($idAsignacion);
 
@@ -38,13 +44,12 @@ class CalificacionController extends Controller
             ->with('estudiante')
             ->get();
 
-        /**
-         * NOTAS YA REGISTRADAS
-         * Se guardan como:
-         * [ id_matricula => nota ]
-         */
         $notasAnteriores = Calificacion::where('id_materia', $asignacion->id_materia)
-            ->pluck('nota', 'id_matricula');
+            ->get()
+            ->groupBy('id_matricula')
+            ->map(function ($calificaciones) {
+                return $calificaciones->pluck('nota', 'periodo');
+            });
 
         return view(
             'docente.calificaciones.create',

@@ -160,7 +160,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 | Gestión completa de calificaciones por parte del docente
 */
 Route::middleware(['auth', 'role:docente'])->prefix('docente')->name('docente.')->group(function () {
-    Route::resource('calificaciones', CalificacionController::class);
+    Route::resource('calificaciones', CalificacionController::class)->except(['create']);
 });
 
 
